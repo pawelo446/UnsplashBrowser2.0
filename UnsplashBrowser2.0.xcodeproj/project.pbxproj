@@ -157,11 +157,11 @@
 			isa = PBXGroup;
 			children = (
 				04416FFF28D8862E001515AB /* ItemInfo.swift */,
-				046BCFBA28EF47F6005D65ED /* PortfolioItem.swift */,
 				046BCFBC28EF4C2C005D65ED /* SaveItem.swift */,
 				046BCFBE28EF4EB2005D65ED /* ShareItem.swift */,
 				046BCFB428EDF957005D65ED /* InstagramItem.swift */,
 				046BCFB628EF4645005D65ED /* TwitterItem.swift */,
+				046BCFBA28EF47F6005D65ED /* PortfolioItem.swift */,
 				0441700528D8A35D001515AB /* ItemInfoHeader.swift */,
 			);
 			path = Iteminfo;

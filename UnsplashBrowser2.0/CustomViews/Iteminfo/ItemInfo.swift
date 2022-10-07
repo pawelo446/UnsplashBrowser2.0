@@ -7,23 +7,28 @@
 
 import UIKit
 
-enum ItemInfoType {
-    case instagram, twitter, save, share, portfolio
+protocol UBSocialmediaItemVCProtocol: AnyObject {
+    func didTapSocialmediaButton(ursl: URL)
 }
 
-class UBItemInfoVC: UIViewController {
+protocol UBShareItemVCProtocol: AnyObject {
+    func didTapShareButton()
+}
+
+
+class UBItemVC: UIViewController {
     
     let titleLabel = UBTitleLabel(textAlignment: .left, fontSize: 14)
     let button = UBButton(frame: .zero)
-    var user: User!
+    var user: User
     
     init(user: User) {
-        super.init(nibName: nil, bundle: nil)
         self.user = user
+        super.init(nibName: nil, bundle: nil)
         configureView()
         configureLabels()
-        configureButtons()
         setType()
+        configureButtons()
     }
     
     required init?(coder: NSCoder) {
@@ -68,24 +73,5 @@ class UBItemInfoVC: UIViewController {
     }
     
     @objc func actionButtonTapped() {}
-    
-    
     func setType() {}
-    //        switch itemInfoType {
-    //        case .save:
-    //            titleLabel.text = "Save Image"
-    //            button.set(color: .systemGreen, title: "", systameImageName: "square.and.arrow.down")
-    //        case .share:
-
-    //        case .instagram:
-    //            titleLabel.text = "Instagram: \(value)"
-    //            button.set(color: .systemRed, title: "", systameImageName: "camera")
-    //        case .twitter:
-    //            titleLabel.text = "twitter: \(value)"
-    //            button.set(color: .systemBlue, title: "", systameImageName: "checkmark")
-    //        case .portfolio:
-    //            titleLabel.text = "Portfolio:"
-    //            button.set(color: .systemTeal, title: "", systameImageName: "safari")
-    //        }
-    //    }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SaveItem: UBItemInfoVC {
+class SaveItem: UBItemVC {
     
     override func setType() {
         titleLabel.text = "Save Image"
@@ -15,8 +15,6 @@ class SaveItem: UBItemInfoVC {
     }
     
     override func actionButtonTapped() {
-        let endpoint = URL(string: "https://instagram.com/" + user.instagramUsername!)
-        presentSafariVC(with: endpoint!)
+        
     }
-    
 }

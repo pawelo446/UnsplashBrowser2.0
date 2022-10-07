@@ -7,7 +7,18 @@
 
 import UIKit
 
-class TwitterItem: UBItemInfoVC {
+class TwitterItem: UBItemVC {
+    
+    weak var delegate: UBSocialmediaItemVCProtocol!
+    
+    init(user: User, delegate: UBSocialmediaItemVCProtocol) {
+        self.delegate = delegate
+        super.init(user: user)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func setType() {
         titleLabel.text = "twitter: \(user.twitterUsername!)"
@@ -15,8 +26,10 @@ class TwitterItem: UBItemInfoVC {
     }
     
     override func actionButtonTapped() {
-        let endpoint = URL(string: "https://twitter.com/" + user.twitterUsername!)
-                            
-        presentSafariVC(with: endpoint!)
+        guard let url = URL(string: "https://www.twitter.com/\(user.twitterUsername!)") else {
+            presentUBAlertOnMainThread(title: "Invalid URL", message: "The url attached to this user is invalid", buttonTitle: "Ok")
+            return
+        }
+        delegate.didTapSocialmediaButton(ursl: url)
     }
 }

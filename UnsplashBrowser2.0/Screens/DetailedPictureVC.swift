@@ -7,18 +7,16 @@
 
 import UIKit
 
-class DetailedPictureVC: UBDataLoadingVC {
+final class DetailedPictureVC: UBDataLoadingVC {
     
     let scrollView = UIScrollView()
     let contentView = UIView()
     
-    
-    
-    let imageView = UBImageDetailView(frame: .zero)
+    var imageView = UBImageDetailView(frame: .zero)
     var header = UIView()
     var share: ShareItem!
     var save: SaveItem!
-    var socialmediaItemsViews: [UBItemInfoVC] = []
+    var socialmediaItemsViews: [UBItemVC] = []
     var socialmediaStackView = UIStackView()
     
     var picture: Picture!
@@ -30,15 +28,12 @@ class DetailedPictureVC: UBDataLoadingVC {
         configureScrollView()
         getPictureAndSizing()
         configureItemHeader()
-        configureShareDownloadItems()
         prepareSocialmediaItems()
+        configureShareDownloadItems()
         configureSocialmediaStackView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
+
     func configureViewController() {
         view.backgroundColor = .systemBackground
         let doneButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(dismissVC))
@@ -122,7 +117,7 @@ class DetailedPictureVC: UBDataLoadingVC {
     
     
     func configureShareDownloadItems() {
-        share = ShareItem(user: self.picture.user)
+        share = ShareItem(user: self.picture.user, delegate: self)
         save = SaveItem(user: self.picture.user)
         self.add(childVC: share, to: self.contentView)
         self.add(childVC: save, to: self.contentView)
@@ -141,20 +136,11 @@ class DetailedPictureVC: UBDataLoadingVC {
     
     
     func prepareSocialmediaItems() {
-        if picture.user.twitterUsername != nil{
-            let item = TwitterItem(user: self.picture.user)
-            socialmediaItemsViews.append(item)
-        }
+        if picture.user.twitterUsername != nil{ socialmediaItemsViews.append(TwitterItem(user: self.picture.user, delegate: self)) }
+
+        if picture.user.instagramUsername != nil{ socialmediaItemsViews.append(InstagramItem(user: self.picture.user, delegate: self)) }
         
-        if picture.user.instagramUsername != nil{
-            let item = InstagramItem(user: self.picture.user)
-            socialmediaItemsViews.append(item)
-        }
-        
-        if picture.user.portfolioUrl != nil{
-            let item = PortfolioItem(user: self.picture.user)
-            socialmediaItemsViews.append(item)
-        }
+        if picture.user.portfolioUrl != nil{ socialmediaItemsViews.append(PortfolioItem(user: self.picture.user, delegate: self)) }
     }
     
     
@@ -177,5 +163,19 @@ class DetailedPictureVC: UBDataLoadingVC {
             socialmediaStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             socialmediaStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
+    }
+}
+
+
+extension DetailedPictureVC: UBSocialmediaItemVCProtocol {
+    func didTapSocialmediaButton(ursl: URL) {
+        presentSafariVC(with: ursl)
+    }
+}
+
+extension DetailedPictureVC: UBShareItemVCProtocol {
+    func didTapShareButton() {
+        let ac = UIActivityViewController(activityItems: [imageView.image!], applicationActivities: nil)
+        present(ac, animated: true)
     }
 }
