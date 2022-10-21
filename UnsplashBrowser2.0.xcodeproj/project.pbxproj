@@ -34,6 +34,7 @@
 		04B15B0C28DB279B00A9EBED /* UBAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B15B0B28DB279B00A9EBED /* UBAlertContainerView.swift */; };
 		04BCF62028FEBBA20068ABB6 /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCF61F28FEBBA20068ABB6 /* PersistanceManager.swift */; };
 		04BCF62228FEFBE20068ABB6 /* LikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCF62128FEFBE20068ABB6 /* LikeButton.swift */; };
+		04C6F2A12902B9A400AED58A /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6F2A02902B9A400AED58A /* FavoriteCell.swift */; };
 		04DF3B9028B3CC6700E89425 /* ApiResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF3B8F28B3CC6700E89425 /* ApiResponseModel.swift */; };
 		04DF3B9328B3CD3400E89425 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF3B9228B3CD3400E89425 /* NetworkManager.swift */; };
 		04DF3B9828B3CEE700E89425 /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF3B9728B3CEE700E89425 /* ErrorMessages.swift */; };
@@ -75,6 +76,7 @@
 		04B15B0B28DB279B00A9EBED /* UBAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UBAlertContainerView.swift; sourceTree = "<group>"; };
 		04BCF61F28FEBBA20068ABB6 /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		04BCF62128FEFBE20068ABB6 /* LikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeButton.swift; sourceTree = "<group>"; };
+		04C6F2A02902B9A400AED58A /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		04DF3B8F28B3CC6700E89425 /* ApiResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponseModel.swift; sourceTree = "<group>"; };
 		04DF3B9228B3CD3400E89425 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		04DF3B9728B3CEE700E89425 /* ErrorMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessages.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				04DF3BA428B3EF1700E89425 /* PictureCell.swift */,
+				04C6F2A02902B9A400AED58A /* FavoriteCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 			files = (
 				04BCF62028FEBBA20068ABB6 /* PersistanceManager.swift in Sources */,
 				04668CCE28D79214004A4D42 /* UBImageDetailView.swift in Sources */,
+				04C6F2A12902B9A400AED58A /* FavoriteCell.swift in Sources */,
 				04DF3B9F28B3DDED00E89425 /* UBTitleLabel.swift in Sources */,
 				046BCFB728EF4645005D65ED /* TwitterItem.swift in Sources */,
 				0441700628D8A35D001515AB /* ItemInfoHeader.swift in Sources */,

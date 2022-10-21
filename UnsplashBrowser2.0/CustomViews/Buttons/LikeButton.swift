@@ -9,13 +9,9 @@ import UIKit
 
 class LikeButton: UIButton {
     
-    var liked: Bool!
-    
-    init(liked: Bool) {
+    init() {
         super.init(frame: .zero)
         configure()
-        self.liked = liked
-        configureType()
     }
     
     required init?(coder: NSCoder) {
@@ -26,36 +22,26 @@ class LikeButton: UIButton {
         configuration = .tinted()
         configuration?.cornerStyle = .capsule
         configuration?.baseBackgroundColor = .secondarySystemBackground
-        
+        configuration?.baseForegroundColor = .white
+        configuration?.image = UIImage(systemName: "heart")
         
         configuration?.imagePadding = 3
         configuration?.imagePlacement = .all
     }
+
     
-    
-    private func configureType() {
-        if liked {
-            configuration?.baseForegroundColor = .red
-            configuration?.image = UIImage(systemName: "heart.fill")
-        } else {
-            configuration?.baseForegroundColor = .white
-            configuration?.image = UIImage(systemName: "heart")
-        }
-    }
-    
-    func tappedAnimation() {
+    func tappedAnimation(isliked: Bool) {
         
-        if liked {
-            UIView.animate(withDuration: 0.5) {
-                self.configuration?.baseForegroundColor = .white
-                self.configuration?.image = UIImage(systemName: "heart")
-            }
-        } else {
+        if isliked {
             UIView.animate(withDuration: 0.5) {
                 self.configuration?.baseForegroundColor = .red
                 self.configuration?.image = UIImage(systemName: "heart.fill")
             }
+        } else {
+            UIView.animate(withDuration: 0.5) {
+                self.configuration?.baseForegroundColor = .white
+                self.configuration?.image = UIImage(systemName: "heart")
+            }
         }
-        liked.toggle()
     }
 }

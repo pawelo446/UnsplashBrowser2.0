@@ -16,6 +16,7 @@ struct PhotoSearchApiResponse: Codable {
 class Picture: Codable, Hashable {
     
     let id: String
+    var liked: Bool? = false
     let urls: Urls
     let description: String?
     let createdAt: String? //1

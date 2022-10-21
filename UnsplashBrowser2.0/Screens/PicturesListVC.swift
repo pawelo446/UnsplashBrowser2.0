@@ -14,6 +14,7 @@ class PicturesListVC: UBDataLoadingVC {
     var phrase: String!
     var pictureList: [Picture] = []
     var filteredPictureList: [Picture] = []
+    var favoriteIDList: [String] = []
     
     var isFiltering = false
     var isLoadingMore = false
@@ -71,7 +72,8 @@ class PicturesListVC: UBDataLoadingVC {
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section,Picture>(collectionView: collectionView, cellProvider: { collectionView, indexPath, picture in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PictureCell.reuseID, for: indexPath) as! PictureCell
-            cell.set(picture: picture, username: picture.user.username)
+            let rand = (Int.random(in: 1..<100) % 5 == 0)
+            cell.set(picture: picture, isLiked: picture.liked!)
             return cell
         })
     }
@@ -117,6 +119,10 @@ class PicturesListVC: UBDataLoadingVC {
         var snapshot = NSDiffableDataSourceSnapshot<Section,Picture>()
         snapshot.appendSections([.main])
         snapshot.appendItems(pictures)
+        favoriteIDList = PersistanceManager.retrieveIDs()
+        pictures.map {$0.liked = self.favoriteIDList.contains($0.id)
+            return $0
+        }
         dataSource.apply(snapshot, animatingDifferences: true)
     }
     

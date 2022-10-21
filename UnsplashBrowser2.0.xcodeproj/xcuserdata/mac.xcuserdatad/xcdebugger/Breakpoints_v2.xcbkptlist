@@ -51,16 +51,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AC1A2DA1-AFAA-4948-A7D6-6C974104AFA8"
+            uuid = "824B5A0D-4BA2-402C-A6D4-8081A6BDD72A"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UnsplashBrowser2.0/CustomViews/Cells/PictureCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "handleTap()"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "PictureCell"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7ECDF51E-8611-4ECB-8B5A-71FE91218206"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UnsplashBrowser2.0/Screens/PicturesListVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "updateData(pictures:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

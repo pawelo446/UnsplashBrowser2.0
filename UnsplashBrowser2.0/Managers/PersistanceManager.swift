@@ -11,7 +11,7 @@ enum PersistanceManager {
     enum Keys {static let favorites = "favorites"}
     
     static func updateWith(favorite: Picture, actionType: PersistanceActionType, completed: @escaping (UBError?) -> Void) {
-        retrieveFacorites { result in
+        retrieveFavorites { result in
             
             switch result {
                 
@@ -37,7 +37,7 @@ enum PersistanceManager {
     }
     
     
-    static func retrieveFacorites(completed: @escaping (Result<[Picture], UBError>) -> Void) {
+    static func retrieveFavorites(completed: @escaping (Result<[Picture], UBError>) -> Void) {
         guard let favoritesData = defaults.object(forKey: Keys.favorites) as? Data else {
             completed(.success([]))
             return
@@ -53,8 +53,22 @@ enum PersistanceManager {
     }
     
     
+    static func retrieveIDs() -> [String] {
+        var cos: [String] = []
+        retrieveFavorites { result in
+            switch result {
+            case .success(var favorites):
+                cos = favorites.map {$0.id}
+            case .failure(var error):
+                print(error.rawValue)
+            }
+        }
+        print(cos)
+        return cos
+    }
+    
+    
     static func save(favourites: [Picture]) -> UBError? {
-        
         do {
             let encoder = JSONEncoder()
             let encodedFavorites = try encoder.encode(favourites)

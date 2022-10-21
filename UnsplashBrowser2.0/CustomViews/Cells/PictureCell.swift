@@ -13,11 +13,10 @@ class PictureCell: UICollectionViewCell {
     let cellPicture = UBPictureCellView(frame: .zero, contentMode: .scaleAspectFill, cornerRadius: 10)
     let usernameLabel = UBTitleLabel(textAlignment: .left, fontSize: 15)
     
-    private lazy var likeButton = LikeButton(liked: false)
+    var likeButton = LikeButton()
+    var isLiked = false
+    var picture: Picture!
     
-    @objc func handleTap() {
-        likeButton.tappedAnimation()
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,14 +25,38 @@ class PictureCell: UICollectionViewCell {
         likeButton.addGestureRecognizer(tap)
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(picture: Picture, username: String) {
+    
+    func set(picture: Picture, isLiked: Bool) {
+        self.picture = picture
         cellPicture.downloadImage(from: picture.urls.small)
-        usernameLabel.text = username
+        usernameLabel.text = picture.user.username
+        
+        if isLiked{
+            self.isLiked = isLiked
+            likeButton.tappedAnimation(isliked: isLiked)
+        }
     }
+    
+    
+    @objc func handleTap() {
+        isLiked.toggle()
+        likeButton.tappedAnimation(isliked: isLiked)
+        if isLiked {
+            PersistanceManager.updateWith(favorite: picture, actionType: .add) { error in
+                print(error)
+            }
+        } else {
+            PersistanceManager.updateWith(favorite: picture, actionType: .remove) { error in
+                print(error)
+            }
+        }
+    }
+    
     
     private func confiugure() {
         addSubview(cellPicture)
@@ -57,9 +80,6 @@ class PictureCell: UICollectionViewCell {
             likeButton.trailingAnchor.constraint(equalTo: cellPicture.trailingAnchor, constant: -15),
             likeButton.heightAnchor.constraint(equalToConstant: 35),
             likeButton.widthAnchor.constraint(equalToConstant: 35)
-            
         ])
-        
     }
-    
 }
