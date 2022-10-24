@@ -57,9 +57,9 @@ enum PersistanceManager {
         var cos: [String] = []
         retrieveFavorites { result in
             switch result {
-            case .success(var favorites):
+            case .success(let favorites):
                 cos = favorites.map {$0.id}
-            case .failure(var error):
+            case .failure(let error):
                 print(error.rawValue)
             }
         }

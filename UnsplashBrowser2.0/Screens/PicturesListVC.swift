@@ -41,6 +41,7 @@ class PicturesListVC: UBDataLoadingVC {
         getPictures(color: nil, page: 1, phrase: phrase)
         configureDataSource()
         configureSearchController()
+        
     }
     
     
@@ -72,7 +73,6 @@ class PicturesListVC: UBDataLoadingVC {
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section,Picture>(collectionView: collectionView, cellProvider: { collectionView, indexPath, picture in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PictureCell.reuseID, for: indexPath) as! PictureCell
-            let rand = (Int.random(in: 1..<100) % 5 == 0)
             cell.set(picture: picture, isLiked: picture.liked!)
             return cell
         })

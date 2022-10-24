@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class NetworkManager {
     static let shared = NetworkManager()
@@ -44,6 +45,30 @@ class NetworkManager {
     }
     
     
+    func fetchRandomPhotos() -> AnyPublisher<[Picture], UBError> {
+        let endpoint = baseUrl + "/photos/random" + "?count=5" + "&client_id=" + apiKey
+        guard let url = URL(string: endpoint) else { return Fail(error: UBError.invalidRequest).eraseToAnyPublisher() }
+        
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(
+                type: [Picture].self,
+                decoder: decoder
+            )
+            .mapError { error in
+                switch error {
+                case is URLError:
+                    return UBError.invalidRequest
+                case is DecodingError:
+                    return UBError.invalidData
+                default:
+                    return UBError.unableToComplete
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+    
+
     func downloadImage (from urlString: String) async throws -> UIImage? {
         let cacheKey = NSString(string: urlString)
         if let image = cache.object(forKey: cacheKey) { return image }

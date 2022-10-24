@@ -35,6 +35,7 @@
 		04BCF62028FEBBA20068ABB6 /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCF61F28FEBBA20068ABB6 /* PersistanceManager.swift */; };
 		04BCF62228FEFBE20068ABB6 /* LikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCF62128FEFBE20068ABB6 /* LikeButton.swift */; };
 		04C6F2A12902B9A400AED58A /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6F2A02902B9A400AED58A /* FavoriteCell.swift */; };
+		04CFF059290302B300066327 /* UBContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF058290302B300066327 /* UBContainerView.swift */; };
 		04DF3B9028B3CC6700E89425 /* ApiResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF3B8F28B3CC6700E89425 /* ApiResponseModel.swift */; };
 		04DF3B9328B3CD3400E89425 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF3B9228B3CD3400E89425 /* NetworkManager.swift */; };
 		04DF3B9828B3CEE700E89425 /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF3B9728B3CEE700E89425 /* ErrorMessages.swift */; };
@@ -77,6 +78,7 @@
 		04BCF61F28FEBBA20068ABB6 /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		04BCF62128FEFBE20068ABB6 /* LikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeButton.swift; sourceTree = "<group>"; };
 		04C6F2A02902B9A400AED58A /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
+		04CFF058290302B300066327 /* UBContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UBContainerView.swift; sourceTree = "<group>"; };
 		04DF3B8F28B3CC6700E89425 /* ApiResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponseModel.swift; sourceTree = "<group>"; };
 		04DF3B9228B3CD3400E89425 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		04DF3B9728B3CEE700E89425 /* ErrorMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessages.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				04668CC728D76F16004A4D42 /* Cells */,
 				04668CCC28D791DC004A4D42 /* ImageViews */,
 				04B15B0B28DB279B00A9EBED /* UBAlertContainerView.swift */,
+				04CFF058290302B300066327 /* UBContainerView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04BCF62028FEBBA20068ABB6 /* PersistanceManager.swift in Sources */,
+				04CFF059290302B300066327 /* UBContainerView.swift in Sources */,
 				04668CCE28D79214004A4D42 /* UBImageDetailView.swift in Sources */,
 				04C6F2A12902B9A400AED58A /* FavoriteCell.swift in Sources */,
 				04DF3B9F28B3DDED00E89425 /* UBTitleLabel.swift in Sources */,

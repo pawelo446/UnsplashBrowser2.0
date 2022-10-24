@@ -32,7 +32,7 @@ class UBTextField: UITextField {
         adjustsFontSizeToFitWidth = true
         minimumFontSize = 12
         
-        backgroundColor = .tertiarySystemBackground
+        backgroundColor = .secondarySystemBackground.withAlphaComponent(0.75)
         autocorrectionType = .no
         returnKeyType = .go
         placeholder = "Enter a phrase"

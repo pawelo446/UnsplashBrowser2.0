@@ -7,15 +7,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "00A50131-ED80-4BAC-A79B-72D0B0A6927F"
+            uuid = "C4CC0EAC-9F8C-4BA4-9069-400B46EC879A"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "UnsplashBrowser2.0/Screens/DetailedPictureVC.swift"
+            filePath = "UnsplashBrowser2.0/Screens/SearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -23,60 +23,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2996925A-A394-4EC5-815D-2E8286384E3F"
+            uuid = "327C5FAC-65B8-4F9E-B834-BD9DED9C13D7"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "UnsplashBrowser2.0/Screens/DetailedPictureVC.swift"
+            filePath = "UnsplashBrowser2.0/Managers/NetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "fetchRandomPhotos()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            uuid = "1E26B188-0A15-4EA1-B129-1FB792517EAE"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            breakpointStackSelectionBehavior = "1"
-            scope = "1"
-            stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "824B5A0D-4BA2-402C-A6D4-8081A6BDD72A"
+            uuid = "B825A89D-FD53-4E84-BE8D-943CE7FB8CB0"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "UnsplashBrowser2.0/CustomViews/Cells/PictureCell.swift"
+            filePath = "UnsplashBrowser2.0/Managers/NetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "PictureCell"
-            landmarkType = "3">
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "fetchRandomPhotos()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7ECDF51E-8611-4ECB-8B5A-71FE91218206"
+            uuid = "056E11E4-1FE6-4DB2-9AE8-D3370DB76F15"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "UnsplashBrowser2.0/Screens/PicturesListVC.swift"
+            filePath = "UnsplashBrowser2.0/Screens/SearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "updateData(pictures:)"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
