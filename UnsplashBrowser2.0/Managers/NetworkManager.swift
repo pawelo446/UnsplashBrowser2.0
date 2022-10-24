@@ -45,25 +45,23 @@ class NetworkManager {
     }
     
     
-    func fetchRandomPhotos() -> AnyPublisher<[Picture], UBError> {
+    func fetchRandomPhotos(refreshPublisher: AnyPublisher<Void, Never>) -> AnyPublisher<[Picture], UBError> {
         let endpoint = baseUrl + "/photos/random" + "?count=5" + "&client_id=" + apiKey
         guard let url = URL(string: endpoint) else { return Fail(error: UBError.invalidRequest).eraseToAnyPublisher() }
         
-        return URLSession.shared.dataTaskPublisher(for: url)
-            .map { $0.data }
-            .decode(
-                type: [Picture].self,
-                decoder: decoder
-            )
-            .mapError { error in
-                switch error {
-                case is URLError:
-                    return UBError.invalidRequest
-                case is DecodingError:
-                    return UBError.invalidData
-                default:
-                    return UBError.unableToComplete
-                }
+        return refreshPublisher
+            .flatMap {
+                URLSession.shared.dataTaskPublisher(for: url)
+                    .map { $0.data }
+                    .decode(type: [Picture].self, decoder: self.decoder)
+                    .mapError {
+                        switch $0 {
+                        case is URLError: return UBError.invalidRequest
+                        case is DecodingError: return UBError.invalidData
+                        default: return UBError.unableToComplete
+                        }
+                    }
+                    .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
     }

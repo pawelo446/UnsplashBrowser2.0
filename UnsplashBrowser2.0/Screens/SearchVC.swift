@@ -21,7 +21,8 @@ class SearchVC: UIViewController {
     var backgroundImageArray: [UIImage] = [UIImage(named: "testbg")!, UIImage(named: "testbg2")!, UIImage(named: "testbg3")!]
     var firstBackgroundIsVisible = false
     var isPhraseEntered: Bool { return !phraseTextField.text!.isEmpty }
-    
+    var backgroundPhotosPublisher: AnyPublisher<[Picture], UBError>?
+    let refreshPhotosPublisher = PassthroughSubject<Void, Never>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,26 +32,51 @@ class SearchVC: UIViewController {
         configurePhraseTextField()
         createDismissKeyboardTapGesture()
         configureBackground()
+    
         
-        var test: [Picture] = []
-        NetworkManager.shared.fetchRandomPhotos().sink(receiveCompletion: { completion in
-            switch completion {
-            case .failure(let err):
-                print(err)
-            case .finished:
-                print("GIT")
-            }
-        }, receiveValue: {
-            test.append(contentsOf: $0)
-            print($0)
+        
+        backgroundPhotosPublisher = NetworkManager.shared.fetchRandomPhotos(
+            refreshPublisher: refreshPhotosPublisher.eraseToAnyPublisher()
+        )
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.backgroundPhotosPublisher?
+                .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let err):
+                    print(err)
+                case .finished:
+                    print("GIT")
+                }
+            }, receiveValue: { [weak self] in
+                guard let image = $0.randomElement() else { return }
+                self?.firstBackgroundImageView.downloadImage(from: image.urls.regular)
+            })
+                .store(in: &self.subscribers)
         })
-        .store(in: &subscribers)
+        
+//        UIView.animate(withDuration: 0.2, animations: {
+//            self.backgroundPhotosPublisher?
+//                .sink(receiveCompletion: { completion in
+//                switch completion {
+//                case .failure(let err):
+//                    print(err)
+//                case .finished:
+//                    print("GIT")
+//                }
+//            }, receiveValue: { [weak self] in
+//                guard let image = $0.randomElement() else { return }
+//                self?.firstBackgroundImageView.downloadImage(from: image.urls.regular)
+//            })
+//                .store(in: &self.subscribers)
+//        })
         
         self.changeBackgroundPhoto(toImage: self.backgroundImageArray[0])
         var i = 1
         Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {_ in
             if i >= 3 { i = 0 }
-            self.changeBackgroundPhoto(toImage: self.backgroundImageArray[i])
+            self.refreshPhotosPublisher.send()
+//            self.changeBackgroundPhoto(toImage: self.backgroundImageArray[i])
             i += 1
         }
     }
@@ -142,20 +168,21 @@ class SearchVC: UIViewController {
     
     
     func changeBackgroundPhoto(toImage: UIImage) {
-        if firstBackgroundIsVisible {
-            UIView.animate(withDuration: 2) {
-                self.firstBackgroundImageView.alpha = 0
-            } completion: { _ in
-                self.firstBackgroundImageView.image = toImage
-            }
-        } else {
-            UIView.animate(withDuration: 2) {
-                self.firstBackgroundImageView.alpha = 1
-            } completion: { _ in
-                self.secondBackgroundImageView.image = toImage
-            }
-        }
-        firstBackgroundIsVisible.toggle()
+        
+//        if firstBackgroundIsVisible {
+//            UIView.animate(withDuration: 2) {
+//                self.firstBackgroundImageView.alpha = 0
+//            } completion: { _ in
+//                self.firstBackgroundImageView.image = toImage
+//            }
+//        } else {
+//            UIView.animate(withDuration: 2) {
+//                self.firstBackgroundImageView.alpha = 1
+//            } completion: { _ in
+//                self.secondBackgroundImageView.image = toImage
+//            }
+//        }
+//        firstBackgroundIsVisible.toggle()
     }
 }
 
