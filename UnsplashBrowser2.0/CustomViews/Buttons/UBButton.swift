@@ -28,6 +28,7 @@ class UBButton: UIButton {
     
     func set(color: UIColor, title: String, systameImageName: String) {
         configuration?.baseBackgroundColor = color
+        
         configuration?.baseForegroundColor = color
         configuration?.title = title
         

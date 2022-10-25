@@ -6,14 +6,15 @@
 //
 
 import UIKit
+import Combine
 
 class NetworkManager {
     static let shared = NetworkManager()
     var cache = NSCache<NSString, UIImage>()
     let decoder = JSONDecoder()
     
-    private let apiKey = "bfeknoZmShMsBPmD_6ZNp_0QUtkMcOAX5tP5UiKHDNs"
     private let baseUrl = "https://api.unsplash.com"
+    private let apiKey = "j-HUOC72dT8lPiKn4IERMh2degmMZ0lOBDbhYGOzGY0"
     
     private init() {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -44,6 +45,28 @@ class NetworkManager {
     }
     
     
+    func fetchRandomPhotos(refreshPublisher: AnyPublisher<Void, Never>) -> AnyPublisher<Picture, UBError> {
+        let endpoint = baseUrl + "/photos/random" + "?client_id=" + apiKey
+        guard let url = URL(string: endpoint) else { return Fail(error: UBError.invalidRequest).eraseToAnyPublisher() }
+        
+        return refreshPublisher
+            .flatMap {
+                URLSession.shared.dataTaskPublisher(for: url)
+                    .map { $0.data }
+                    .decode(type: Picture.self, decoder: self.decoder)
+                    .mapError {
+                        switch $0 {
+                        case is URLError: return UBError.invalidRequest
+                        case is DecodingError: return UBError.invalidData
+                        default: return UBError.unableToComplete
+                        }
+                    }
+                    .eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
+    }
+    
+
     func downloadImage (from urlString: String) async throws -> UIImage? {
         let cacheKey = NSString(string: urlString)
         if let image = cache.object(forKey: cacheKey) { return image }
