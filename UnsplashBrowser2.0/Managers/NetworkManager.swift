@@ -36,7 +36,7 @@ class NetworkManager {
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             throw UBError.invalidResponse
         }
-
+        
         do {
             return try decoder.decode(PhotoSearchApiResponse.self, from: data)
         } catch {
@@ -66,19 +66,19 @@ class NetworkManager {
             .eraseToAnyPublisher()
     }
     
-
-    func downloadImage (from urlString: String) async throws -> UIImage? {
+    
+    func downloadImage (from urlString: String) async throws -> UIImage {
         let cacheKey = NSString(string: urlString)
         if let image = cache.object(forKey: cacheKey) { return image }
-        guard let url = URL(string: urlString) else { return nil }
+        guard let url = URL(string: urlString) else { return Images.placeholderImage! }
         
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
-            guard let image = UIImage(data: data) else { return nil }
+            guard let image = UIImage(data: data) else { return Images.placeholderImage! }
             cache.setObject(image, forKey: cacheKey)
             return image
         } catch {
-            return nil
+            return Images.placeholderImage!
         }
     }
 }

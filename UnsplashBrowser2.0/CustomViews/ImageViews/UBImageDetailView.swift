@@ -8,8 +8,6 @@
 import UIKit
 
 class UBImageDetailView: UIImageView {
-
-    let placeholder = UIImage(named: "UB-Logo")!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,7 +20,7 @@ class UBImageDetailView: UIImageView {
     }
     
     private func configure() {
-        image = placeholder
+        
         translatesAutoresizingMaskIntoConstraints = false
         contentMode = .scaleAspectFit
         layer.cornerRadius = 10

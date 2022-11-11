@@ -19,7 +19,16 @@ final class DetailedPictureVC: UBDataLoadingVC {
     var socialmediaItemsViews: [UBItemVC] = []
     var socialmediaStackView = UIStackView()
     
-    var picture: Picture!
+    var picture: Picture
+    
+    init(picture: Picture) {
+        self.picture = picture
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +42,8 @@ final class DetailedPictureVC: UBDataLoadingVC {
         configureSocialmediaStackView()
     }
     
-
-    func configureViewController() {
+    
+    private func configureViewController() {
         view.backgroundColor = .systemBackground
         let doneButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(dismissVC))
         navigationItem.rightBarButtonItem = doneButton
@@ -46,7 +55,7 @@ final class DetailedPictureVC: UBDataLoadingVC {
     }
     
     
-    func configureScrollView() {
+    private func configureScrollView() {
         view.addSubview(scrollView)
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.addSubview(contentView)
@@ -72,7 +81,7 @@ final class DetailedPictureVC: UBDataLoadingVC {
         presentLoadingView()
         contentView.addSubview(imageView)
         imageView.isHidden = true
-
+        
         let group = DispatchGroup()
         group.enter()
         Task {
@@ -89,19 +98,21 @@ final class DetailedPictureVC: UBDataLoadingVC {
     }
     
     
-    func configureImage() {
+    private func configureImage() {
         let padding: CGFloat = 5
+        let imageViewHeight:CGFloat = imageView.image!.size.height / imageView.image!.size.width
         
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
             imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -padding),
-            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier:  imageView.image!.size.height / imageView.image!.size.width),
+            imageView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: imageViewHeight),
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
     }
     
     
-    func configureItemHeader() {
+    private func configureItemHeader() {
         header = ItemInfoHeader(picture: picture)
         contentView.addSubview(header)
         header.translatesAutoresizingMaskIntoConstraints = false
@@ -116,7 +127,7 @@ final class DetailedPictureVC: UBDataLoadingVC {
     }
     
     
-    func configureShareDownloadItems() {
+    private func configureShareDownloadItems() {
         share = ShareItem(user: self.picture.user, delegate: self)
         save = SaveItem(user: self.picture.user)
         self.add(childVC: share, to: self.contentView)
@@ -137,14 +148,14 @@ final class DetailedPictureVC: UBDataLoadingVC {
     
     func prepareSocialmediaItems() {
         if picture.user.twitterUsername != nil{ socialmediaItemsViews.append(TwitterItem(user: self.picture.user, delegate: self)) }
-
+        
         if picture.user.instagramUsername != nil{ socialmediaItemsViews.append(InstagramItem(user: self.picture.user, delegate: self)) }
         
         if picture.user.portfolioUrl != nil{ socialmediaItemsViews.append(PortfolioItem(user: self.picture.user, delegate: self)) }
     }
     
     
-    func configureSocialmediaStackView() {
+    private func configureSocialmediaStackView() {
         socialmediaStackView.distribution = .fillEqually
         socialmediaStackView.spacing = 10
         socialmediaStackView.axis = .vertical

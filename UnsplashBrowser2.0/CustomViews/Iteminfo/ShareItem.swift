@@ -8,7 +8,7 @@
 import UIKit
 
 class ShareItem: UBItemVC {
-
+    
     weak var delegate: UBShareItemVCProtocol!
     
     init(user: User, delegate: UBShareItemVCProtocol) {

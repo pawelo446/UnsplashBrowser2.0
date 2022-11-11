@@ -19,7 +19,7 @@ class UBButton: UIButton {
         self.init(frame: .zero)
         set(color: color, title: title, systameImageName: systameImageName)
     }
-
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

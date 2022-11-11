@@ -48,11 +48,11 @@ class PictureCell: UICollectionViewCell {
         likeButton.tappedAnimation(isliked: isLiked)
         if isLiked {
             PersistanceManager.updateWith(favorite: picture, actionType: .add) { error in
-                print(error)
+                print(error as Any)
             }
         } else {
             PersistanceManager.updateWith(favorite: picture, actionType: .remove) { error in
-                print(error)
+                print(error as Any)
             }
         }
     }

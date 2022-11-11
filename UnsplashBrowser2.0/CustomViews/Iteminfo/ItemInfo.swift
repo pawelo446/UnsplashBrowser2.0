@@ -36,7 +36,7 @@ class UBItemVC: UIViewController {
     }
     
     
-    func configureView() {
+    private func configureView() {
         view.backgroundColor = .secondarySystemBackground
         view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +44,7 @@ class UBItemVC: UIViewController {
     }
     
     
-    func configureLabels() {
+    private func configureLabels() {
         view.addSubview(titleLabel)
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.numberOfLines = 2
@@ -59,7 +59,7 @@ class UBItemVC: UIViewController {
     }
     
     
-    func configureButtons() {
+    private func configureButtons() {
         view.addSubview(button)
         button.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
         

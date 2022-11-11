@@ -8,7 +8,7 @@
 import UIKit
 
 class UBDataLoadingVC: UIViewController {
-
+    
     var containerView: UIView!
     let activityIndicator = UIActivityIndicatorView(style: .large)
     
@@ -23,7 +23,7 @@ class UBDataLoadingVC: UIViewController {
         containerView.backgroundColor = .systemBackground
         containerView.alpha = 0
         UIView.animate(withDuration: 0.5) { self.containerView.alpha = 0.8 }
-
+        
         containerView.addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.startAnimating()
@@ -38,7 +38,7 @@ class UBDataLoadingVC: UIViewController {
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
-
+    
     
     func dismissLoadingView() {
         activityIndicator.stopAnimating()

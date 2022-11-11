@@ -8,7 +8,7 @@
 import UIKit
 
 class UBTextField: UITextField {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -37,5 +37,5 @@ class UBTextField: UITextField {
         returnKeyType = .go
         placeholder = "Enter a phrase"
     }
-
+    
 }

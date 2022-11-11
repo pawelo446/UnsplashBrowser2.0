@@ -8,7 +8,7 @@
 import UIKit
 
 class ItemInfoHeader: UIView {
-
+    
     let avatarImageView = UBPictureCellView(frame: .zero, contentMode: .scaleToFill, cornerRadius: 40)
     let usernameLabel = UBTitleLabel(textAlignment: .left, fontSize: 20)
     let nameLabel = UBSecondaryTitleLabel(fontSize: 18)
@@ -31,7 +31,7 @@ class ItemInfoHeader: UIView {
     }
     
     
-    func configureUIElements() {
+    private func configureUIElements() {
         backgroundColor = .secondarySystemBackground
         layer.cornerRadius = 10
         addSubviews(usernameLabel, nameLabel, photoDescription, avatarImageView, likeImageView, likeCount)
@@ -39,7 +39,7 @@ class ItemInfoHeader: UIView {
         if let avatarUrl = picture.user.profileImage?.medium {
             avatarImageView.downloadImage(from: avatarUrl)
         } else {
-            avatarImageView.image = UIImage(named: "UB-Logo")
+            avatarImageView.image = Images.ubLogo
         }
         usernameLabel.text = "Username: " + picture.user.username
         nameLabel.text = (picture.user.name ?? "")
@@ -48,13 +48,13 @@ class ItemInfoHeader: UIView {
         photoDescription.numberOfLines = 3
         photoDescription.lineBreakMode = .byWordWrapping
         
-        likeImageView.image = UIImage(systemName: "heart")
+        likeImageView.image = SFSymbols.heart
         likeImageView.tintColor = .secondaryLabel
         likeCount.text = String(picture.likes)
         
         layoutUI()
     }
-
+    
     
     func layoutUI() {
         let padding: CGFloat = 10

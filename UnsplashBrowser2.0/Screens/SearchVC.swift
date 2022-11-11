@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class SearchVC: UIViewController {
+final class SearchVC: UIViewController {
     
     let logoImageView = UIImageView()
     let searchButton = UBButton()
@@ -17,7 +17,6 @@ class SearchVC: UIViewController {
     let firstBackgroundImageView = UIImageView(frame: UIScreen.main.bounds)
     
     var subscribers = Set<AnyCancellable>()
-    var backgroundImageArray: [UIImage] = [UIImage(named: "testbg")!, UIImage(named: "testbg2")!, UIImage(named: "testbg3")!]
     var firstBackgroundIsVisible = false
     var isPhraseEntered: Bool { return !phraseTextField.text!.isEmpty }
     var backgroundPhotosPublisher: AnyPublisher<Picture, UBError>?
@@ -32,7 +31,7 @@ class SearchVC: UIViewController {
         createDismissKeyboardTapGesture()
         configureBackground()
         self.refreshPhotosPublisher.send()
-        Timer.scheduledTimer(withTimeInterval: 13, repeats: true) {_ in
+        Timer.scheduledTimer(withTimeInterval: 15, repeats: true) {_ in
             self.refreshPhotosPublisher.send()
         }
     }
@@ -60,10 +59,10 @@ class SearchVC: UIViewController {
     }
     
     
-    func configureLogoImageView() {
+    private func configureLogoImageView() {
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoImageView.image = UIImage(named: "UB-Logo")!.withTintColor(.secondaryLabel)
+        logoImageView.image = Images.ubLogo!.withTintColor(.secondaryLabel)
         
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
@@ -74,7 +73,7 @@ class SearchVC: UIViewController {
     }
     
     
-    func configurePhraseTextField() {
+    private func configurePhraseTextField() {
         view.addSubview(phraseTextField)
         phraseTextField.delegate = self
         
@@ -87,7 +86,7 @@ class SearchVC: UIViewController {
     }
     
     
-    func configureSearchButton() {
+    private func configureSearchButton() {
         view.addSubview(searchButton)
         searchButton.set(color: .systemPink, title: "Search", systameImageName: "magnifyingglass")
         searchButton.addTarget(self, action: #selector(pushPictureList), for: .touchUpInside)
@@ -101,7 +100,7 @@ class SearchVC: UIViewController {
     }
     
     
-    func configurecontainer() {
+    private func configurecontainer() {
         view.addSubview(container)
         container.layer.cornerRadius = 50
         container.layer.opacity = 0.9
@@ -115,15 +114,15 @@ class SearchVC: UIViewController {
     }
     
     
-    func configureBackground() {
+    private func configureBackground() {
         firstBackgroundImageView.contentMode = UIView.ContentMode.scaleAspectFill
         self.view.insertSubview(firstBackgroundImageView, at: 0)
         
         backgroundPhotosPublisher = NetworkManager.shared.fetchRandomPhotos(
             refreshPublisher: refreshPhotosPublisher.eraseToAnyPublisher()
         )
-            self.backgroundPhotosPublisher?
-                .sink(receiveCompletion: { completion in
+        self.backgroundPhotosPublisher?
+            .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let err):
                     print(err)
@@ -143,7 +142,7 @@ class SearchVC: UIViewController {
                     }
                 }
             })
-                .store(in: &self.subscribers)
+            .store(in: &self.subscribers)
     }
 }
 

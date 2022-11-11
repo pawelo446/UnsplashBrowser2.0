@@ -32,5 +32,5 @@ class PortfolioItem: UBItemVC {
         }
         delegate.didTapSocialmediaButton(ursl: url)
     }
-
+    
 }

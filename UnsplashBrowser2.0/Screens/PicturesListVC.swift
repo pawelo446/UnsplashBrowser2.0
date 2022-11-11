@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PicturesListVC: UBDataLoadingVC {
+final class PicturesListVC: UBDataLoadingVC {
     
     enum Section{ case main }
     
@@ -51,7 +51,7 @@ class PicturesListVC: UBDataLoadingVC {
     }
     
     
-    func configureCollectionView() {
+    private func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout(in: self.view))
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
@@ -60,7 +60,7 @@ class PicturesListVC: UBDataLoadingVC {
     }
     
     
-    func configureSearchController() {
+    private func configureSearchController() {
         let searchController = UISearchController()
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = "Search for a username"
@@ -70,7 +70,7 @@ class PicturesListVC: UBDataLoadingVC {
     }
     
     
-    func configureDataSource() {
+    private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section,Picture>(collectionView: collectionView, cellProvider: { collectionView, indexPath, picture in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PictureCell.reuseID, for: indexPath) as! PictureCell
             cell.set(picture: picture, isLiked: picture.liked!)
@@ -120,7 +120,7 @@ class PicturesListVC: UBDataLoadingVC {
         snapshot.appendSections([.main])
         snapshot.appendItems(pictures)
         favoriteIDList = PersistanceManager.retrieveIDs()
-        pictures.map {$0.liked = self.favoriteIDList.contains($0.id)
+        pictures.map { $0.liked = self.favoriteIDList.contains($0.id)
             return $0
         }
         dataSource.apply(snapshot, animatingDifferences: true)
@@ -133,7 +133,7 @@ class PicturesListVC: UBDataLoadingVC {
         let cancelFilterButton = UIAction { (action) in
             self.colorButtonTapped(color: nil)
         }
-        cancelFilterButton.image = UIImage(systemName: "circle.slash")
+        cancelFilterButton.image = SFSymbols.circleSlash
         cancelFilterButton.title = "none"
         colorButtons.append(cancelFilterButton)
         
@@ -156,13 +156,13 @@ class PicturesListVC: UBDataLoadingVC {
     }
     
     
-    func configureViewController() {
+    private func configureViewController() {
         title = phrase
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         
         let menu = UIMenu(title: "Filter by colors", image: nil, identifier: .text, options: .displayInline, children: getColorButtons())
-        let addButton = UIBarButtonItem(title: nil, image: UIImage(systemName: "paintpalette"), primaryAction: nil, menu: menu)
+        let addButton = UIBarButtonItem(title: nil, image: SFSymbols.paintPalette, primaryAction: nil, menu: menu)
         navigationItem.rightBarButtonItem = addButton
     }
 }
@@ -190,8 +190,7 @@ extension PicturesListVC: UICollectionViewDelegate {
         let activeArray = isFiltering ? filteredPictureList : pictureList
         let picture = activeArray[indexPath.item]
         
-        let destVC = DetailedPictureVC()
-        destVC.picture = picture
+        let destVC = DetailedPictureVC(picture: picture)
         let navController = UINavigationController(rootViewController: destVC)
         present(navController, animated: true)
     }

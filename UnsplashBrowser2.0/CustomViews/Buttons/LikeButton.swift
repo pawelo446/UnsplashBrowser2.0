@@ -23,24 +23,24 @@ class LikeButton: UIButton {
         configuration?.cornerStyle = .capsule
         configuration?.baseBackgroundColor = .secondarySystemBackground
         configuration?.baseForegroundColor = .white
-        configuration?.image = UIImage(systemName: "heart")
+        configuration?.image = SFSymbols.heart
         
         configuration?.imagePadding = 3
         configuration?.imagePlacement = .all
     }
-
+    
     
     func tappedAnimation(isliked: Bool) {
         
         if isliked {
             UIView.animate(withDuration: 0.5) {
                 self.configuration?.baseForegroundColor = .red
-                self.configuration?.image = UIImage(systemName: "heart.fill")
+                self.configuration?.image = SFSymbols.circleFilled
             }
         } else {
             UIView.animate(withDuration: 0.5) {
                 self.configuration?.baseForegroundColor = .white
-                self.configuration?.image = UIImage(systemName: "heart")
+                self.configuration?.image = SFSymbols.heart
             }
         }
     }

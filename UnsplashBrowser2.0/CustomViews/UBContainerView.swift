@@ -8,7 +8,7 @@
 import UIKit
 
 class UBContainerView: UIView {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()

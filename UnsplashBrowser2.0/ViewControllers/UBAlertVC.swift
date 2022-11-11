@@ -17,7 +17,6 @@ class UBAlertVC: UIViewController {
     var alertTitle: String?
     var message: String?
     var buttonTitle: String?
-    
     let padding: CGFloat = 20
     
     
@@ -46,7 +45,7 @@ class UBAlertVC: UIViewController {
     }
     
     
-    func configureContainerView() {
+    private func configureContainerView() {
         NSLayoutConstraint.activate([
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -56,7 +55,7 @@ class UBAlertVC: UIViewController {
     }
     
     
-    func configureTitleLabel() {
+    private func configureTitleLabel() {
         titleLabel.text = alertTitle ?? "Something went wrong"
         
         NSLayoutConstraint.activate([
@@ -68,7 +67,7 @@ class UBAlertVC: UIViewController {
     }
     
     
-    func configureActionButton() {
+    private func configureActionButton() {
         actionButton.setTitle(buttonTitle ?? "Ok", for: .normal)
         actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         
@@ -81,7 +80,7 @@ class UBAlertVC: UIViewController {
     }
     
     
-    func configureMessageLabel() {
+    private func configureMessageLabel() {
         messageLabel.text = message ?? "Unable to complete request"
         messageLabel.numberOfLines = 4
         

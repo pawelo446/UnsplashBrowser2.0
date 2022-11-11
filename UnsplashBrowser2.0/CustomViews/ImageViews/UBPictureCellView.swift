@@ -9,7 +9,7 @@ import UIKit
 
 class UBPictureCellView: UIImageView {
     
-    let placeholder = UIImage(named: "UB-Logo")!
+    let placeholder = Images.ubLogo!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
