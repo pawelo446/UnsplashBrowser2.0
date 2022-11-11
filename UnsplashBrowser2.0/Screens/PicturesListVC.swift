@@ -14,7 +14,6 @@ final class PicturesListVC: UBDataLoadingVC {
     var phrase: String!
     var pictureList: [Picture] = []
     var filteredPictureList: [Picture] = []
-    var favoriteIDList: [String] = []
     
     var isFiltering = false
     var isLoadingMore = false
@@ -48,6 +47,7 @@ final class PicturesListVC: UBDataLoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        LikedIdList.shared.updateIDs()
     }
     
     
@@ -119,8 +119,8 @@ final class PicturesListVC: UBDataLoadingVC {
         var snapshot = NSDiffableDataSourceSnapshot<Section,Picture>()
         snapshot.appendSections([.main])
         snapshot.appendItems(pictures)
-        favoriteIDList = PersistanceManager.retrieveIDs()
-        pictures.map { $0.liked = self.favoriteIDList.contains($0.id)
+        LikedIdList.shared.updateIDs()
+        pictures.map { $0.liked = LikedIdList.shared.IdList.contains($0.id)
             return $0
         }
         dataSource.apply(snapshot, animatingDifferences: true)

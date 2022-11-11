@@ -34,6 +34,7 @@ enum PersistanceManager {
                 completed(error)
             }
         }
+        LikedIdList.shared.updateIDs()
     }
     
     
@@ -51,22 +52,6 @@ enum PersistanceManager {
             completed(.failure(.unableToFavorite))
         }
     }
-    
-    
-    static func retrieveIDs() -> [String] {
-        var cos: [String] = []
-        retrieveFavorites { result in
-            switch result {
-            case .success(let favorites):
-                cos = favorites.map {$0.id}
-            case .failure(let error):
-                print(error.rawValue)
-            }
-        }
-        print(cos)
-        return cos
-    }
-    
     
     static func save(favourites: [Picture]) -> UBError? {
         do {

@@ -35,7 +35,7 @@ class LikeButton: UIButton {
         if isliked {
             UIView.animate(withDuration: 0.5) {
                 self.configuration?.baseForegroundColor = .red
-                self.configuration?.image = SFSymbols.circleFilled
+                self.configuration?.image = SFSymbols.heartFilled
             }
         } else {
             UIView.animate(withDuration: 0.5) {
